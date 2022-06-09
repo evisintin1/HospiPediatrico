@@ -1,13 +1,13 @@
 //Todo lo relacionado con express (módulos, middlewares, configuraciones etc)
-
 const express = require("express");
+const app = express();
 const path = require("path");
 const morgan = require("morgan");
 const cloudinary = require("cloudinary").v2;
-const app = express();
 const myRouter = require("./routes/myRouter");
 const cors = require("cors");
 const session = require('express-session');
+const product = require("./routes/myRouter");
 //Defino el motor de plantillas a utilizar
 app.set("view engine", "ejs");
 //Defino la localización de mis vistas
@@ -27,6 +27,7 @@ app.use(express.json());
 //Configurando archivos estáticos
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/routes/myRouter",product);
 
 //Agrego un enrutador compatible
 app.use("/", myRouter);
